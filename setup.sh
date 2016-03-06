@@ -28,9 +28,6 @@ rm -rf build
 
 echo "Cloning poky, $my_branch branch"
 git clone -b $my_branch git://git.yoctoproject.org/poky
-cd poky
-git revert --no-edit 64ab17b707dc431aaed880d6d8615971243f46f8
-cd ..
 
 echo "Cloning meta-intel, $my_branch branch"
 git clone -b $my_branch git://git.yoctoproject.org/meta-intel poky/meta-intel
