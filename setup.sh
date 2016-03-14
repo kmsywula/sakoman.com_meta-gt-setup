@@ -2,6 +2,14 @@
 
 set -e
 
+SRCREV_POKY=37b61b059031e3c272a929b834e12fd83f46598c
+SRCREV_INTEL=7965dc814964a30e54542b1d5ef2029d565240bd
+SRCREV_IOT_MIDDLEWARE=ed3991f551b879401bf09ca7d1101d1fdd8f9fa9
+SRCREV_GT_BSP=auto
+SRCREV_GT_EXTRAS=auto
+SRCREV_OE=a1e135a499998add7575682bf53db5e02e753580
+SRCREV_ROS=279e7303c9695ab517cf26e0e1db4911fcfc8e4c
+
 if [ $# -eq 0 ]; then
 	echo ""
 	echo "Usage: $0 <branch> <dlss_dir>"
@@ -28,24 +36,59 @@ rm -rf build
 
 echo "Cloning poky, $my_branch branch"
 git clone -b $my_branch git://git.yoctoproject.org/poky
+if [[ $SRCREV_POKY != "auto" ]]; then
+	cd poky
+	git checkout $SRCREV_POKY
+	cd ..
+fi
 
 echo "Cloning meta-intel, $my_branch branch"
 git clone -b $my_branch git://git.yoctoproject.org/meta-intel poky/meta-intel
+if [[ $SRCREV_INTEL != "auto" ]]; then
+	cd poky/meta-intel
+	git checkout $SRCREV_INTEL
+	cd ../..
+fi
 
 echo "Cloning meta-openembedded, $my_branch branch"
 git clone -b $my_branch git://git.openembedded.org/meta-openembedded poky/meta-openembedded
+if [[ $SRCREV_OE != "auto" ]]; then
+	cd poky/meta-openembedded
+	git checkout $SRCREV_OE
+	cd ../..
+fi
 
 echo "Cloning meta-ros, master branch"
 git clone -b master git://github.com/bmwcarit/meta-ros.git poky/meta-ros
+if [[ $SRCREV_ROS != "auto" ]]; then
+	cd poky/meta-ros
+	git checkout $SRCREV_ROS
+	cd ../..
+fi
 
 echo "Cloning meta-intel-iot-middleware, master branch"
 git clone -b master git://git.yoctoproject.org/meta-intel-iot-middleware poky/meta-intel-iot-middleware
+if [[ $SRCREV_IOT_MIDDLEWARE != "auto" ]]; then
+	cd poky/meta-intel-iot-middleware
+	git checkout $SRCREV_IOT_MIDDLEWARE
+	cd ../..
+fi
 
 echo "Cloning meta-gt-bsp, $my_branch branch"
 git clone -b $my_branch git://sandbox.sakoman.com/meta-gt-bsp.git poky/meta-gt-bsp
+if [[ $SRCREV_GT_BSP != "auto" ]]; then
+	cd poky/meta-gt-bsp
+	git checkout $SRCREV_GT_BSP
+	cd ../..
+fi
 
 echo "Cloning meta-gt-extras, $my_branch branch"
 git clone -b $my_branch git://sandbox.sakoman.com/meta-gt-extras.git poky/meta-gt-extras
+if [[ $SRCREV_GT_EXTRAS != "auto" ]]; then
+	cd poky/meta-gt-extras
+	git checkout $SRCREV_GT_EXTRAS
+	cd ../..
+fi
 
 set build
 TEMPLATECONF=meta-gt-extras/conf source poky/oe-init-build-env >> /dev/null
