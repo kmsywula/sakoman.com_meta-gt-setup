@@ -93,7 +93,7 @@ fi
 set build
 TEMPLATECONF=meta-gt-extras/conf source poky/oe-init-build-env >> /dev/null
 
-if [ "X$my_dl" = "Xdefault" ]; then
+if [ "X$my_dlss" = "Xdefault" ]; then
 	echo "Using default download and sstate directories"
 else
 	echo DL_DIR ?= \""$my_dlss"/downloads\" >> conf/local.conf
