@@ -102,6 +102,9 @@ fi
 set build
 TEMPLATECONF=meta-gt-extras/conf source poky/oe-init-build-env >> /dev/null
 
+# hack for meta-intel-librealsense
+echo BBMASK = \"meta-intel-librealsense/recipes-kernel/linux/\" >> conf/local.conf
+
 if [ "X$my_dlss" = "Xdefault" ]; then
 	echo "Using default download and sstate directories"
 else
