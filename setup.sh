@@ -9,6 +9,7 @@ SRCREV_GT_BSP=auto
 SRCREV_GT_EXTRAS=auto
 SRCREV_OE=57a687bc554cc15de9fc6c17aec7a3ea9175abbd
 SRCREV_ROS=69c4af9ee6fdbb563bea3e2cb32b3ddeeea630ad
+SRCREV_REALSENSE=auto
 
 if [ $# -eq 0 ]; then
 	echo ""
@@ -71,6 +72,14 @@ git clone -b master git://git.yoctoproject.org/meta-intel-iot-middleware poky/me
 if [[ $SRCREV_IOT_MIDDLEWARE != "auto" ]]; then
 	cd poky/meta-intel-iot-middleware
 	git checkout $SRCREV_IOT_MIDDLEWARE
+	cd ../..
+fi
+
+echo "Cloning meta-intel-librealsense, master branch"
+git clone -b master git://github.com/IntelRealSense/meta-intel-librealsense.git poky/meta-intel-librealsense
+if [[ $SRCREV_REALSENSE != "auto" ]]; then
+	cd poky/meta-intel-librealsense
+	git checkout $SRCREV_REALSENSE
 	cd ../..
 fi
 
