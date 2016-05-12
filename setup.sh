@@ -10,7 +10,7 @@ SRCREV_GT_EXTRAS=auto
 SRCREV_OE=73fa6a99128d299733612779ffd504d280520e1f
 SRCREV_ROS=69c4af9ee6fdbb563bea3e2cb32b3ddeeea630ad
 SRCREV_REALSENSE=auto
-SRCREV_JAVA=e53735323f3d827ff4dbbf1fb274806060356eff
+SRCREV_JAVA=74811bbadaf55fd105ad092a1fcb4923afd4d41d
 
 if [ $# -eq 0 ]; then
 	echo ""
@@ -68,8 +68,8 @@ if [[ $SRCREV_ROS != "auto" ]]; then
 	cd ../..
 fi
 
-echo "Cloning meta-java, openjdk-8 branch"
-git clone -b openjdk-8 git://github.com/intel-iot-devkit/meta-java.git poky/meta-java
+echo "Cloning meta-java, master branch"
+git clone -b master http://git.yoctoproject.org/git/meta-java poky/meta-java
 if [[ $SRCREV_JAVA != "auto" ]]; then
 	cd poky/meta-java
 	git checkout $SRCREV_JAVA
