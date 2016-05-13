@@ -4,7 +4,6 @@ set -e
 
 SRCREV_POKY=6c1c01392d91f512e2949ad1d57a75a8077478ba
 SRCREV_INTEL=7d2b2f5b644a2729c75b8ecb38345c9668d2c8bb
-SRCREV_IOT_MIDDLEWARE=821cf14c8304669d9ce0c5b87b9be5a6eecff6e5
 SRCREV_IOT_DEVKIT_MW=4f9817abaf7a975ebc06e204fa5bec300984b277
 SRCREV_GT_BSP=auto
 SRCREV_GT_EXTRAS=auto
@@ -74,14 +73,6 @@ git clone -b master http://git.yoctoproject.org/git/meta-java poky/meta-java
 if [[ $SRCREV_JAVA != "auto" ]]; then
 	cd poky/meta-java
 	git checkout $SRCREV_JAVA
-	cd ../..
-fi
-
-echo "Cloning meta-intel-iot-middleware, master branch"
-git clone -b master git://git.yoctoproject.org/meta-intel-iot-middleware poky/meta-intel-iot-middleware
-if [[ $SRCREV_IOT_MIDDLEWARE != "auto" ]]; then
-	cd poky/meta-intel-iot-middleware
-	git checkout $SRCREV_IOT_MIDDLEWARE
 	cd ../..
 fi
 
