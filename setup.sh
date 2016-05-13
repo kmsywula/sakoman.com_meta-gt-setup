@@ -5,6 +5,7 @@ set -e
 SRCREV_POKY=6c1c01392d91f512e2949ad1d57a75a8077478ba
 SRCREV_INTEL=7d2b2f5b644a2729c75b8ecb38345c9668d2c8bb
 SRCREV_IOT_MIDDLEWARE=821cf14c8304669d9ce0c5b87b9be5a6eecff6e5
+SRCREV_IOT_DEVKIT_MW=4f9817abaf7a975ebc06e204fa5bec300984b277
 SRCREV_GT_BSP=auto
 SRCREV_GT_EXTRAS=auto
 SRCREV_OE=73fa6a99128d299733612779ffd504d280520e1f
@@ -81,6 +82,14 @@ git clone -b master git://git.yoctoproject.org/meta-intel-iot-middleware poky/me
 if [[ $SRCREV_IOT_MIDDLEWARE != "auto" ]]; then
 	cd poky/meta-intel-iot-middleware
 	git checkout $SRCREV_IOT_MIDDLEWARE
+	cd ../..
+fi
+
+echo "Cloning meta-intel-iot-devkit-mw, master branch"
+git clone -b master https://github.com/intel-iot-devkit/meta-intel-iot-devkit-mw.git poky/meta-intel-iot-devkit-mw
+if [[ $SRCREV_IOT_DEVKIT_MW != "auto" ]]; then
+	cd poky/meta-intel-iot-devkit-mw
+	git checkout $SRCREV_IOT_DEVKIT_MW
 	cd ../..
 fi
 
