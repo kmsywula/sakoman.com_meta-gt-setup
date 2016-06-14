@@ -5,8 +5,10 @@ set -e
 SRCREV_POKY=6c1c01392d91f512e2949ad1d57a75a8077478ba
 SRCREV_INTEL=7d2b2f5b644a2729c75b8ecb38345c9668d2c8bb
 SRCREV_IOT_DEVKIT_MW=4f9817abaf7a975ebc06e204fa5bec300984b277
-SRCREV_GT_BSP=auto
-SRCREV_GT_EXTRAS=auto
+SRCREV_GT_BSP=185892c343c75ce7093358e4edda4cff0c10a51e
+#SRCREV_GT_BSP=auto
+#SRCREV_GT_EXTRAS=auto
+SRCREV_GT_EXTRAS=873a994bc66db5dedd7824a22eedf21f1194df6c
 SRCREV_OE=73fa6a99128d299733612779ffd504d280520e1f
 SRCREV_ROS=69c4af9ee6fdbb563bea3e2cb32b3ddeeea630ad
 SRCREV_REALSENSE=auto
@@ -92,13 +94,7 @@ if [[ $SRCREV_REALSENSE != "auto" ]]; then
 	cd ../..
 fi
 
-echo "Cloning meta-gt-bsp, $my_branch branch"
-git clone -b $my_branch git://sandbox.sakoman.com/meta-gt-bsp.git poky/meta-gt-bsp
-if [[ $SRCREV_GT_BSP != "auto" ]]; then
-	cd poky/meta-gt-bsp
-	git checkout $SRCREV_GT_BSP
-	cd ../..
-fi
+
 
 echo "Cloning meta-gt-extras, $my_branch branch"
 git clone -b $my_branch git://sandbox.sakoman.com/meta-gt-extras.git poky/meta-gt-extras
@@ -108,6 +104,14 @@ if [[ $SRCREV_GT_EXTRAS != "auto" ]]; then
 	cd ../..
 fi
 
+my_branch=src_uri_bug
+echo "Cloning meta-gt-bsp, $my_branch branch"
+git clone -b $my_branch https://github.com/kmsywula/sakoman.com_meta-gt-bsp.git poky/meta-gt-bsp
+if [[ $SRCREV_GT_BSP != "auto" ]]; then
+	cd poky/meta-gt-bsp
+	git checkout $SRCREV_GT_BSP
+	cd ../..
+fi
 set build
 TEMPLATECONF=meta-gt-extras/conf source poky/oe-init-build-env >> /dev/null
 
